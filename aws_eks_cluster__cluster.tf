@@ -8,15 +8,15 @@ resource "aws_eks_cluster" "cluster" {
   ]
   name = aws_ssm_parameter.tf-eks-cluster-name.value
 
-  role_arn = aws_iam_role.eks-cluster-ServiceRole-HUIGIC7K7HNJ.arn
+  role_arn = aws_iam_role.eks-cluster-ServiceRole.arn
   tags     = {}
   version  = var.eks_version
 
   timeouts {}
 
   vpc_config {
-    endpoint_private_access = true
-    endpoint_public_access  = false
+    endpoint_private_access = false
+    endpoint_public_access  = true
     public_access_cidrs = [
       "0.0.0.0/0",
     ]

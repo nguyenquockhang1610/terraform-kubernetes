@@ -1,18 +1,18 @@
-resource "aws_route_table" "rtb-0102c621469c344cd" {
+resource "aws_route_table" "rtb-p1" {
   propagating_vgws = []
   route            = []
   tags             = {}
   vpc_id           = aws_vpc.cluster.id
 }
 
-resource "aws_route_table" "rtb-0329e787bbafcb2c4" {
+resource "aws_route_table" "rtb-p2" {
   propagating_vgws = []
   route            = []
   tags             = {}
   vpc_id           = aws_vpc.cluster.id
 }
 
-resource "aws_route_table" "rtb-041267f0474c24068" {
+resource "aws_route_table" "rtb-p3" {
   propagating_vgws = []
   route            = []
   tags             = {}

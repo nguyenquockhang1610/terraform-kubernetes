@@ -1,4 +1,4 @@
-resource "aws_iam_role" "eks-cluster-ServiceRole-HUIGIC7K7HNJ" {
+resource "aws_iam_role" "eks-cluster-ServiceRole" {
   assume_role_policy = jsonencode(
     {
       Statement = [
@@ -18,7 +18,7 @@ resource "aws_iam_role" "eks-cluster-ServiceRole-HUIGIC7K7HNJ" {
   )
   force_detach_policies = false
   max_session_duration  = 3600
-  name                  = "eks-cluster-ServiceRole-HUIGIC7K7HNJ"
+  name                  = "eks-cluster-ServiceRole"
   path                  = "/"
   tags = {
     "Name" = "eks-cluster/ServiceRole"
@@ -26,6 +26,3 @@ resource "aws_iam_role" "eks-cluster-ServiceRole-HUIGIC7K7HNJ" {
   }
 }
 
-output "cluster_service_role_arn" {
-  value = aws_iam_role.eks-cluster-ServiceRole-HUIGIC7K7HNJ.arn
-}

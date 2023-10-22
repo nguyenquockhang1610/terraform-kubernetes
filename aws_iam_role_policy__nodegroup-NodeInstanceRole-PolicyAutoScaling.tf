@@ -1,4 +1,4 @@
-resource "aws_iam_role_policy" "eks-nodegroup-ng-ma-NodeInstanceRole-1GFKA1037E1XO__eks-nodegroup-ng-maneksami2-PolicyAutoScaling" {
+resource "aws_iam_role_policy" "eks-nodegroup-ng-ma-NodeInstanceRole__eks-nodegroup-ng-maneksami2-PolicyAutoScaling" {
   name = "eks-nodegroup-ng-maneksami2-PolicyAutoScaling"
   policy = jsonencode(
     {
@@ -20,16 +20,16 @@ resource "aws_iam_role_policy" "eks-nodegroup-ng-ma-NodeInstanceRole-1GFKA1037E1
       Version = "2012-10-17"
     }
   )
-  role = aws_iam_role.eks-nodegroup-ng-ma-NodeInstanceRole-1GFKA1037E1XO.id
+  role = aws_iam_role.eks-nodegroup-ng-ma-NodeInstanceRole.id
 }
 resource "aws_iam_policy_attachment" "eks-nodegroup-eks-policy-attachments" {
   name       = "eks-nodegroup-eks-policy-attachment"
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
-  roles      = [aws_iam_role.eks-nodegroup-ng-ma-NodeInstanceRole-1GFKA1037E1XO.name]
+  roles      = [aws_iam_role.eks-nodegroup-ng-ma-NodeInstanceRole.name]
 }
 
 resource "aws_iam_policy_attachment" "eks-nodegroup-ecr-policy-attachments" {
   name       = "eks-nodegroup-ecr-policy-attachment"
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
-  roles      = [aws_iam_role.eks-nodegroup-ng-ma-NodeInstanceRole-1GFKA1037E1XO.name]
+  roles      = [aws_iam_role.eks-nodegroup-ng-ma-NodeInstanceRole.name]
 }

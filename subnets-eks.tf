@@ -8,7 +8,6 @@ resource "aws_subnet" "subnet-i1" {
   tags = {
     "Name"                                                                 = format("i1-%s", aws_ssm_parameter.tf-eks-cluster-name.value)
     "kubernetes.io/cluster/${aws_ssm_parameter.tf-eks-cluster-name.value}" = "shared"
-    "workshop"                                                             = "subnet-i1"
   }
   vpc_id = aws_vpc.cluster.id
 
@@ -25,7 +24,6 @@ resource "aws_subnet" "subnet-i2" {
   tags = {
     "Name"                                                                 = format("i2-%s", aws_ssm_parameter.tf-eks-cluster-name.value)
     "kubernetes.io/cluster/${aws_ssm_parameter.tf-eks-cluster-name.value}" = "shared"
-    "workshop"                                                             = "subnet-i2"
   }
   vpc_id = aws_vpc.cluster.id
 
@@ -44,7 +42,6 @@ resource "aws_subnet" "subnet-i3" {
   tags = {
     "Name"                                                                 = format("i3-%s", aws_ssm_parameter.tf-eks-cluster-name.value)
     "kubernetes.io/cluster/${aws_ssm_parameter.tf-eks-cluster-name.value}" = "shared"
-    "workshop"                                                             = "subnet-i3"
   }
   vpc_id = aws_vpc.cluster.id
 
@@ -62,7 +59,6 @@ resource "aws_subnet" "subnet-p1" {
     "Name"                                                                 = "Private1"
     "kubernetes.io/cluster/${aws_ssm_parameter.tf-eks-cluster-name.value}" = "shared"
     "kubernetes.io/role/internal-elb"                                      = "1"
-    "workshop"                                                             = "subnet-p1"
   }
   vpc_id = aws_vpc.cluster.id
 
@@ -79,7 +75,6 @@ resource "aws_subnet" "subnet-p2" {
     "Name"                                                                 = "Private2"
     "kubernetes.io/cluster/${aws_ssm_parameter.tf-eks-cluster-name.value}" = "shared"
     "kubernetes.io/role/internal-elb"                                      = "1"
-    "workshop"                                                             = "subnet-p2"
   }
   vpc_id = aws_vpc.cluster.id
 
@@ -97,7 +92,6 @@ resource "aws_subnet" "subnet-p3" {
     "Name"                                                                 = "Private3"
     "kubernetes.io/cluster/${aws_ssm_parameter.tf-eks-cluster-name.value}" = "shared"
     "kubernetes.io/role/internal-elb"                                      = "1"
-    "workshop"                                                             = "subnet-p3"
   }
   vpc_id = aws_vpc.cluster.id
 
