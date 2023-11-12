@@ -15,7 +15,7 @@ resource "aws_eks_cluster" "cluster" {
   timeouts {}
 
   vpc_config {
-    endpoint_private_access = false
+    endpoint_private_access = true
     endpoint_public_access  = true
     public_access_cidrs = [
       "0.0.0.0/0",

@@ -28,7 +28,7 @@ metadata:
   namespace: kube-system
 data:
   mapRoles: |
-    - rolearn: data.terraform_remote_state.iam.outputs.nodegroup_role_arn
+    - rolearn: aws_iam_role.eks-nodegroup-ng-ma-NodeInstanceRole.arn
       username: system:node:{{EC2PrivateDNSName}}
       groups:
         - system:bootstrappers
@@ -39,8 +39,8 @@ CONFIGMAPAWSAUTH
 apiVersion: v1
 clusters:
 - cluster:
-    server: aws_eks_cluster.eks-cluster.endpoint
-    certificate-authority-data: aws_eks_cluster.eks-cluster.certificate_authority.0.data
+    server: aws_eks_cluster.cluster.endpoint
+    certificate-authority-data: aws_eks_cluster.cluster.certificate_authority.0.data
   name: kubernetes
 contexts:
 - context:
@@ -59,7 +59,7 @@ users:
       args:
         - "token"
         - "-i"
-        - "aws_eks_cluster.eks-cluster.name"
+        - "aws_eks_cluster.cluster.name"
 KUBECONFIG
 }
 

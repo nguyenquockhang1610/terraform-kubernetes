@@ -1,11 +1,30 @@
-resource "aws_security_group_rule" "eks-all" {
+resource "aws_security_group_rule" "eks-https" {
   type              = "ingress"
   from_port         = 443
   to_port           = 443
   protocol          = "tcp"
+  cidr_blocks       = [aws_vpc.bastion_vpc.cidr_block]
+  security_group_id = aws_security_group.cluster-sg.id
+}
+
+resource "aws_security_group_rule" "eks-http" {
+  type              = "ingress"
+  from_port         = 80
+  to_port           = 80
+  protocol          = "tcp"
+  cidr_blocks       = [aws_vpc.bastion_vpc.cidr_block]
+  security_group_id = aws_security_group.cluster-sg.id
+}
+
+resource "aws_security_group_rule" "eks-all" {
+  type              = "ingress"
+  from_port         = 80
+  to_port           = 80
+  protocol          = "tcp"
   cidr_blocks       = [aws_vpc.cluster.cidr_block]
   security_group_id = aws_security_group.cluster-sg.id
 }
+
 resource "aws_security_group_rule" "eks-all-egress" {
   type              = "egress"
   from_port         = 0
@@ -19,7 +38,7 @@ resource "aws_security_group_rule" "eks-node" {
   from_port         = 22
   to_port           = 22
   protocol          = "tcp"
-  cidr_blocks       = [aws_vpc.cluster.cidr_block] # Sử dụng [ ] để đặt giá trị trong một danh sách
+  cidr_blocks       = [aws_vpc.cluster.cidr_block] 
   security_group_id = aws_security_group.allnodes-sg.id
 }
 resource "aws_security_group_rule" "eks-node-egress" {
@@ -64,13 +83,4 @@ resource "aws_security_group_rule" "eks-node-self" {
   protocol          = "-1"
   self              = true
   security_group_id = aws_security_group.allnodes-sg.id
-}
-
-resource "aws_security_group_rule" "eks-ssl" {
-  type              = "ingress"
-  from_port         = 443
-  to_port           = 443
-  protocol          = "tcp"
-  cidr_blocks       = [aws_vpc.cluster.cidr_block]
-  security_group_id = aws_security_group.cluster-sg.id
 }

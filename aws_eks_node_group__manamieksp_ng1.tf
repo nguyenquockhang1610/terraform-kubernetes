@@ -15,7 +15,6 @@ resource "aws_eks_node_group" "ng1" {
   ]
   tags = {
     "alpha.eksctl.io/cluster-name"                = aws_eks_cluster.cluster.name
-    "alpha.eksctl.io/eksctl-version"              = "0.29.2"
     "alpha.eksctl.io/nodegroup-name"              = format("ng1-%s", aws_eks_cluster.cluster.name)
     "alpha.eksctl.io/nodegroup-type"              = "managed"
     "eksctl.cluster.k8s.io/v1alpha1/cluster-name" = aws_eks_cluster.cluster.name

@@ -1,10 +1,10 @@
 #### User data for worker launch
 resource "aws_launch_template" "lt-ng1" {
-  instance_type          = "t2.micro"
+  instance_type          = "m5.large"
   key_name               = "eks"
   name                   = format("at-lt-%s-ng1", aws_eks_cluster.cluster.name)
   tags                   = {}
-  image_id               = aws_ssm_parameter.eksami.value
+  image_id               = data.aws_ssm_parameter.eksami.value
   vpc_security_group_ids = [aws_security_group.allnodes-sg.id]
   user_data              = base64encode(local.eks-node-private-userdata)
   tag_specifications {

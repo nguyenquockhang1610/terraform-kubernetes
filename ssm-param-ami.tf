@@ -1,6 +1,3 @@
-resource "aws_ssm_parameter" "eksami" {
-  name        = format("/eks/eks-cluster/ami-id")
-  description = "EKS AMI Image ID"
-  type        = "String"
-  value       = "ami-0f844a9675b22ea32"
+data "aws_ssm_parameter" "eksami" {
+  name = format("/aws/service/eks/optimized-ami/%s/amazon-linux-2/recommended/image_id", aws_eks_cluster.cluster.version)
 }

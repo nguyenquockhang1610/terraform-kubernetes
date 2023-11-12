@@ -59,7 +59,8 @@ resource "aws_ssm_parameter" "tf-eks-cluster-name" {
 }
 
 resource "aws_ssm_parameter" "cluster_service_role_arn" {
-  name  = "/eks/cluster_service_role_arn"
-  type  = "String"
-  value = "aws_iam_role.eks-cluster-ServiceRole-HUIGIC7K7HNJ.arn"
+  name      = "/eks/cluster_service_role_arn"
+  type      = "String"
+  value     = "aws_iam_role.eks-cluster-ServiceRole.arn"
+  overwrite = true
 }

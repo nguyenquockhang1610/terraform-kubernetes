@@ -1,4 +1,5 @@
 resource "aws_eks_identity_provider_config" "oidc" {
+  depends_on   = [aws_eks_cluster.cluster]
   cluster_name = aws_eks_cluster.cluster.name
 
   oidc {
