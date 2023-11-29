@@ -2,7 +2,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 5.19.0"
+      version = ">= 2.0.0"
     }
     null = {
       source  = "hashicorp/null"
@@ -18,7 +18,7 @@ terraform {
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "~> 1.1.1"
+      version = "~> 2.11.0"
     }
     local = {
       source  = "hashicorp/local"
@@ -33,23 +33,23 @@ terraform {
   required_version = ">= 1.2.0"
 }
 provider "aws" {
-  region     = "us-east-1"
-  access_key = "AKIA5TNVOOFRK2FIEDQM"
-  secret_key = "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"
+  region     = "ap-southeast-1"
+   access_key = "AKIARREQSXCAZXFO7W4G"
+  secret_key = "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" 
 }
 provider "null" {}
 provider "external" {}
 provider "kubernetes" {
-  config_path = "/home/ubuntu/.kube/config"
+  config_path = "/home/ubuntu/terraform/.kube/config"
 }
 //Remote backend S3
 terraform {
   backend "s3" {
-    bucket         = "remote-backend-01"
+    bucket         = "remotebackend-1"
     key            = "terraform.tfstate"
-    region         = "us-east-1"
+    region         = "ap-southeast-1"
     encrypt        = true
-    dynamodb_table = "remote-backend-01"
+    dynamodb_table = "remotebackend-1"
 
   }
 }

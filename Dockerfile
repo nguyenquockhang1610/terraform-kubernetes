@@ -1,11 +1,12 @@
-# Sử dụng một image gốc có sẵn từ Docker Hub
+# Use a base image from Docker Hub
 FROM httpd:2.4
 
-# Sao chép tệp tin và thư mục từ máy tính cục bộ vào image
-COPY /web/ /usr/local/apache2/htdocs/
+# Copy files and directories from the local machine to the image
+COPY ./web/ /usr/local/apache2/htdocs/
 
-# Khai báo cổng mà Apache sẽ lắng nghe
+# Expose both HTTP (80) and HTTPS (443) ports
 EXPOSE 80
+EXPOSE 443
 
-# Khởi động Apache khi container chạy
+# Start Apache when the container runs
 CMD ["httpd", "-D", "FOREGROUND"]

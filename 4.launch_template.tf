@@ -1,6 +1,5 @@
-#### User data for worker launch
 resource "aws_launch_template" "lt-ng1" {
-  instance_type          = "m5.large"
+  instance_type          = "t3.small"
   key_name               = "eks"
   name                   = format("at-lt-%s-ng1", aws_eks_cluster.cluster.name)
   tags                   = {}

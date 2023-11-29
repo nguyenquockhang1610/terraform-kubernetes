@@ -17,7 +17,7 @@ resource "aws_vpc_endpoint" "vpce-autoscaling" {
     aws_security_group.allnodes-sg.id,
     aws_security_group.cluster-sg.id
   ]
-  service_name = "com.amazonaws.us-east-1.autoscaling"
+  service_name = "com.amazonaws.ap-southeast-1.autoscaling"
   subnet_ids = [
     aws_subnet.subnet-i3.id,
     aws_subnet.subnet-i1.id,
@@ -26,8 +26,6 @@ resource "aws_vpc_endpoint" "vpce-autoscaling" {
   tags              = {}
   vpc_endpoint_type = "Interface"
   vpc_id            = aws_vpc.cluster.id
-
-  timeouts {}
 }
 
 # aws_vpc_endpoint.vpce-ec2:
@@ -50,7 +48,7 @@ resource "aws_vpc_endpoint" "vpce-ec2" {
     aws_security_group.allnodes-sg.id,
     aws_security_group.cluster-sg.id
   ]
-  service_name = "com.amazonaws.us-east-1.ec2"
+  service_name = "com.amazonaws.ap-southeast-1.ec2"
   subnet_ids = [
     aws_subnet.subnet-i3.id,
     aws_subnet.subnet-i1.id,
@@ -59,8 +57,6 @@ resource "aws_vpc_endpoint" "vpce-ec2" {
   tags              = {}
   vpc_endpoint_type = "Interface"
   vpc_id            = aws_vpc.cluster.id
-
-  timeouts {}
 }
 
 # aws_vpc_endpoint.vpce-vpce-ec2messages:
@@ -83,7 +79,7 @@ resource "aws_vpc_endpoint" "vpce-vpce-ec2messages" {
     aws_security_group.allnodes-sg.id,
     aws_security_group.cluster-sg.id
   ]
-  service_name = "com.amazonaws.us-east-1.ec2messages"
+  service_name = "com.amazonaws.ap-southeast-1.ec2messages"
   subnet_ids = [
     aws_subnet.subnet-i3.id,
     aws_subnet.subnet-i1.id,
@@ -116,7 +112,7 @@ resource "aws_vpc_endpoint" "vpce-ecrapi" {
     aws_security_group.allnodes-sg.id,
     aws_security_group.cluster-sg.id
   ]
-  service_name = "com.amazonaws.us-east-1.ecr.api"
+  service_name = "com.amazonaws.ap-southeast-1.ecr.api"
   subnet_ids = [
     aws_subnet.subnet-i3.id,
     aws_subnet.subnet-i1.id,
@@ -125,8 +121,6 @@ resource "aws_vpc_endpoint" "vpce-ecrapi" {
   tags              = {}
   vpc_endpoint_type = "Interface"
   vpc_id            = aws_vpc.cluster.id
-
-  timeouts {}
 }
 
 # aws_vpc_endpoint.vpce-ecrdkr:
@@ -149,7 +143,7 @@ resource "aws_vpc_endpoint" "vpce-ecrdkr" {
     aws_security_group.allnodes-sg.id,
     aws_security_group.cluster-sg.id
   ]
-  service_name = "com.amazonaws.us-east-1.ecr.dkr"
+  service_name = "com.amazonaws.ap-southeast-1.ecr.dkr"
   subnet_ids = [
     aws_subnet.subnet-i3.id,
     aws_subnet.subnet-i1.id,
@@ -158,8 +152,6 @@ resource "aws_vpc_endpoint" "vpce-ecrdkr" {
   tags              = {}
   vpc_endpoint_type = "Interface"
   vpc_id            = aws_vpc.cluster.id
-
-  timeouts {}
 }
 
 # aws_vpc_endpoint.vpce-ec2:
@@ -182,7 +174,7 @@ resource "aws_vpc_endpoint" "vpce-elb" {
     aws_security_group.allnodes-sg.id,
     aws_security_group.cluster-sg.id
   ]
-  service_name = "com.amazonaws.us-east-1.elasticloadbalancing"
+  service_name = "com.amazonaws.ap-southeast-1.elasticloadbalancing"
   subnet_ids = [
     aws_subnet.subnet-i3.id,
     aws_subnet.subnet-i1.id,
@@ -191,8 +183,6 @@ resource "aws_vpc_endpoint" "vpce-elb" {
   tags              = {}
   vpc_endpoint_type = "Interface"
   vpc_id            = aws_vpc.cluster.id
-
-  timeouts {}
 }
 
 # aws_vpc_endpoint.vpce-logs:
@@ -215,7 +205,7 @@ resource "aws_vpc_endpoint" "vpce-logs" {
     aws_security_group.allnodes-sg.id,
     aws_security_group.cluster-sg.id
   ]
-  service_name = "com.amazonaws.us-east-1.logs"
+  service_name = "com.amazonaws.ap-southeast-1.logs"
   subnet_ids = [
     aws_subnet.subnet-i3.id,
     aws_subnet.subnet-i1.id,
@@ -251,13 +241,11 @@ resource "aws_vpc_endpoint" "vpce-s3" {
     aws_route_table.rtb-i.id,
   ]
   security_group_ids = []
-  service_name       = "com.amazonaws.us-east-1.s3"
+  service_name       = "com.amazonaws.ap-southeast-1.s3"
   subnet_ids         = []
   tags               = {}
   vpc_endpoint_type  = "Gateway"
   vpc_id             = aws_vpc.cluster.id
-
-  timeouts {}
 }
 
 # aws_vpc_endpoint.vpce-sts:
@@ -280,7 +268,7 @@ resource "aws_vpc_endpoint" "vpce-sts" {
     aws_security_group.allnodes-sg.id,
     aws_security_group.cluster-sg.id
   ]
-  service_name = "com.amazonaws.us-east-1.sts"
+  service_name = "com.amazonaws.ap-southeast-1.sts"
   subnet_ids = [
     aws_subnet.subnet-i3.id,
     aws_subnet.subnet-i1.id,
@@ -289,8 +277,6 @@ resource "aws_vpc_endpoint" "vpce-sts" {
   tags              = {}
   vpc_endpoint_type = "Interface"
   vpc_id            = aws_vpc.cluster.id
-
-  timeouts {}
 }
 
 resource "aws_vpc_endpoint" "vpce-eks" {
@@ -312,7 +298,7 @@ resource "aws_vpc_endpoint" "vpce-eks" {
     aws_security_group.allnodes-sg.id,
     aws_security_group.cluster-sg.id
   ]
-  service_name = "com.amazonaws.us-east-1.eks"
+  service_name = "com.amazonaws.ap-southeast-1.eks"
   subnet_ids = [
     aws_subnet.subnet-i3.id,
     aws_subnet.subnet-i1.id,
@@ -321,39 +307,4 @@ resource "aws_vpc_endpoint" "vpce-eks" {
   tags              = {}
   vpc_endpoint_type = "Interface"
   vpc_id            = aws_vpc.cluster.id
-
-  timeouts {}
-}
-
-
-resource "aws_vpc_endpoint" "vpce-grafana" {
-  policy = jsonencode(
-    {
-      Statement = [
-        {
-          Action    = "*"
-          Effect    = "Allow"
-          Principal = "*"
-          Resource  = "*"
-        },
-      ]
-    }
-  )
-  private_dns_enabled = true
-  route_table_ids     = []
-  security_group_ids = [
-    aws_security_group.allnodes-sg.id,
-    aws_security_group.cluster-sg.id
-  ]
-  service_name = "com.amazonaws.us-east-1.grafana"
-  subnet_ids = [
-    aws_subnet.subnet-i3.id,
-    aws_subnet.subnet-i1.id,
-    aws_subnet.subnet-i2.id,
-  ]
-  tags              = {}
-  vpc_endpoint_type = "Interface"
-  vpc_id            = aws_vpc.cluster.id
-
-  timeouts {}
 }

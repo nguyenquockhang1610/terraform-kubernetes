@@ -12,10 +12,7 @@ resource "null_resource" "post-policy" {
         acc=$(echo ${aws_eks_cluster.cluster.arn} | cut -f5 -d':')
         cn=$(echo ${aws_eks_cluster.cluster.name})
         echo "$reg $cn $acc"
-        ./post-policy.sh $reg $cn $acc
-        #echo "reannotate nodes"
-        #cd ../eks-cidr
-        #./reannotate-nodes.sh $cn
+        ./6.post-policy.sh $reg $cn $acc
         echo "done"
      EOT
   }

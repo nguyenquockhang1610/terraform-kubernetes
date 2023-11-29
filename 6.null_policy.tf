@@ -1,5 +1,4 @@
 resource "null_resource" "policy" {
-  depends_on = [aws_eks_node_group.ng1]
   triggers = {
     always_run = timestamp()
   }

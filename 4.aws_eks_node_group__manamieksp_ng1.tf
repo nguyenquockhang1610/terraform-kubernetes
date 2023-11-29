@@ -1,4 +1,5 @@
 resource "aws_eks_node_group" "ng1" {
+  depends_on      = [aws_launch_template.lt-ng1]
   cluster_name    = aws_eks_cluster.cluster.name
   node_group_name = format("ng1-%s", aws_eks_cluster.cluster.name)
   node_role_arn   = aws_iam_role.eks-nodegroup-ng-ma-NodeInstanceRole.arn
@@ -30,5 +31,5 @@ resource "aws_eks_node_group" "ng1" {
     max_size     = 3
     min_size     = 1
   }
-  timeouts {}
+
 }

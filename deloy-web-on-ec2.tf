@@ -3,9 +3,7 @@ resource "null_resource" "update_kubeconfig" {
 
   provisioner "local-exec" {
     command = <<EOT
-      aws eks update-kubeconfig --name mycluster1 &&
-      cat ${pathexpand("~/.kube/config")} > /home/ubuntu/.kube/tmp_config &&
-      mv /home/ubuntu/.kube/tmp_config /home/ubuntu/.kube/config
+      aws eks update-kubeconfig --name ${aws_eks_cluster.mycluster1.name} --kubeconfig /home/ubuntu/terraform/.kube/config
     EOT
   }
 }
@@ -25,7 +23,7 @@ resource "kubernetes_namespace" "my-web-app" {
 }
 
 resource "kubernetes_deployment" "my_web_app__deployment" {
-  depends_on = [kubernetes_namespace.my-web-app]
+  depends_on = [kubernetes_namespace.my-web-app, aws_eks_node_group.ng1]
   metadata {
     name      = "deployment-my-web-app"
     namespace = "my-web-app"
@@ -61,7 +59,7 @@ resource "kubernetes_deployment" "my_web_app__deployment" {
         termination_grace_period_seconds = 30
 
         container {
-          image             = "935072788834.dkr.ecr.us-east-1.amazonaws.com/my-web-app"
+          image             = "105529915521.dkr.ecr.ap-southeast-1.amazonaws.com/my-web-app:tag"
           name              = "my-web-app"
           image_pull_policy = "Always"
           port {
@@ -79,9 +77,13 @@ resource "kubernetes_deployment" "my_web_app__deployment" {
 
 resource "kubernetes_service" "my-web-app__service" {
   depends_on = [kubernetes_deployment.my_web_app__deployment]
+
   metadata {
     name      = "service-my-web-app"
     namespace = "my-web-app"
+    annotations = {
+      "service.beta.kubernetes.io/aws-load-balancer-external" = "true"
+    }
   }
 
   spec {
@@ -89,7 +91,7 @@ resource "kubernetes_service" "my-web-app__service" {
       "app.kubernetes.io/name" = "my-web-app"
     }
 
-    type = "NodePort"
+    type = "LoadBalancer"
 
     port {
       port        = 80
@@ -97,16 +99,21 @@ resource "kubernetes_service" "my-web-app__service" {
       target_port = "80"
     }
   }
-
 }
+
 
 resource "kubernetes_ingress_v1" "my-web-app__ingress" {
   depends_on = [kubernetes_service.my-web-app__service]
   metadata {
-    annotations = { "alb.ingress.kubernetes.io/scheme" = "internal", "alb.ingress.kubernetes.io/target-type" = "ip", "alb.ingress.kubernetes.io/listen-ports" = "[{\"HTTP\": 8080}]" }
-    name        = "ingress-my-web-app"
-    namespace   = "my-web-app"
+    annotations = {
+      "alb.ingress.kubernetes.io/scheme"       = "internet-facing"
+      "alb.ingress.kubernetes.io/target-type"  = "ip"
+      "alb.ingress.kubernetes.io/listen-ports" = "[{\"HTTP\": 80}]"
+    }
+    name      = "ingress-my-web-app"
+    namespace = "my-web-app"
   }
+
   spec {
     ingress_class_name = "alb"
     rule {

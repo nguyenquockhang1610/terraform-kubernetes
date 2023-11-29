@@ -27,9 +27,3 @@ resource "aws_iam_policy_attachment" "eks-nodegroup-eks-policy-attachments" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
   roles      = [aws_iam_role.eks-nodegroup-ng-ma-NodeInstanceRole.name]
 }
-
-resource "aws_iam_policy_attachment" "eks-nodegroup-ecr-policy-attachments" {
-  name       = "eks-nodegroup-ecr-policy-attachment"
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
-  roles      = [aws_iam_role.eks-nodegroup-ng-ma-NodeInstanceRole.name]
-}

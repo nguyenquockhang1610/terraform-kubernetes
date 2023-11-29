@@ -1,5 +1,5 @@
 output "region" {
-  value = "us-east-1" # Thay thế giá trị này bằng giá trị thực tế của bạn
+  value = "ap-southeast-1p" # Thay thế giá trị này bằng giá trị thực tế của bạn
 }
 
 output "s3_bucket" {

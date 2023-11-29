@@ -3,15 +3,16 @@ resource "aws_eks_addon" "vpc-cni" {
   cluster_name      = aws_ssm_parameter.tf-eks-cluster-name.value
   addon_name        = "vpc-cni"
   resolve_conflicts = "OVERWRITE"
-  addon_version     = "v1.15.1-eksbuild.1"
+  addon_version     = "v1.15.4-eksbuild.1"
   preserve          = true
 }
 
 resource "aws_eks_addon" "kube-proxy" {
-  depends_on    = [aws_eks_node_group.ng1]
-  cluster_name  = aws_ssm_parameter.tf-eks-cluster-name.value
-  addon_name    = "kube-proxy"
-  addon_version = "v1.28.1-eksbuild.1"
+  depends_on        = [aws_eks_node_group.ng1]
+  cluster_name      = aws_ssm_parameter.tf-eks-cluster-name.value
+  addon_name        = "kube-proxy"
+  addon_version     = "v1.28.1-eksbuild.1"
+  resolve_conflicts = "OVERWRITE"
 }
 
 resource "aws_eks_addon" "coredns" {

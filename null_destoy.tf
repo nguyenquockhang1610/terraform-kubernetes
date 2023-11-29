@@ -8,7 +8,7 @@ resource "null_resource" "destroy" {
     when        = destroy
     interpreter = ["/bin/bash", "-c"]
     command     = <<EOT
-        if [ -f "crds.yml" ]; then
+      if [ -f "crds.yml" ]; then
         echo "Set context"
         arn=$(terraform state show aws_eks_cluster.cluster | grep arn | grep :cluster | cut -f2 -d'=' | jq -r .)
         echo $arn
@@ -16,7 +16,8 @@ resource "null_resource" "destroy" {
         echo "Remove CRD"
         kubectl delete -f crds.yaml 
         echo "done"
-        fi
-     EOT
+      fi
+      
+    EOT
   }
 }
