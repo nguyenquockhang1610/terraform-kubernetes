@@ -34,8 +34,8 @@ terraform {
 }
 provider "aws" {
   region     = "ap-southeast-1"
-   access_key = "AKIARREQSXCAZXFO7W4G"
-  secret_key = "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" 
+/*    access_key = "AKIA4V5IIVGFR7SXQHHA"
+  secret_key = "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"  */
 }
 provider "null" {}
 provider "external" {}
@@ -45,11 +45,11 @@ provider "kubernetes" {
 //Remote backend S3
 terraform {
   backend "s3" {
-    bucket         = "remotebackend-1"
+    bucket         = "remotebackend1"
     key            = "terraform.tfstate"
     region         = "ap-southeast-1"
     encrypt        = true
-    dynamodb_table = "remotebackend-1"
+    dynamodb_table = "remotebackend1"
 
   }
 }

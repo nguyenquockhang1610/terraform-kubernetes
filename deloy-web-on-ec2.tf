@@ -59,7 +59,7 @@ resource "kubernetes_deployment" "my_web_app__deployment" {
         termination_grace_period_seconds = 30
 
         container {
-          image             = "105529915521.dkr.ecr.ap-southeast-1.amazonaws.com/my-web-app:tag"
+          image             = "871694379403.dkr.ecr.ap-southeast-1.amazonaws.com/my-web-app:latest"
           name              = "my-web-app"
           image_pull_policy = "Always"
           port {
